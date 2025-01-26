@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="theme-color" content="#000000">
+	<title>Game</title>
+	<link rel="apple-touch-icon" href="/images/icon/apple-touch-icon.png">
+	<link rel="android-chrome-192x192" href="/images/icon/android-chrome-192x192.png">
+	<link rel="manifest" href="/manifest.json">
+	<link rel="stylesheet" href="css/mafia.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.once.js"></script>
+	<script src="js/drupal.js"></script>
+	<script src="js/slick.min.js"></script>
+	<script src="js/game_actions.js"></script>
+	<script src="script.js"></script>
+	<!-- Подключаем новый файл players.js -->
+	<script src="js/players.js"></script>
+	<style>
+		.hidden { display: none; }
+	</style>
+</head>
+<body>
+<script>
+	var bmp_target = [0];
+	var best_player = [[0.50, 1], [0.50, 1]];
+	var city = [1, 0, 0];
+	var mafia = [1, 0, 0];
+	var sheriff = [1, 0, 0];
+	var don = [1, 0, 0];
+	var first_killed = [0, 0, 0];
+	var bm_03 = [-1, 0, 0];
+	var bm_13 = [0, 0, 0];
+	var bm_23 = [0.25, 0.25, 0];
+	var bm_33 = [0.5, 0.5, 0];
+	var bms_03 = [-1, -0.5, 0];
+	var bms_13 = [0, 1, 0];
+	var bms_23 = [0.25, 0.25, 0];
+	var bms_33 = [0.5, 0.5, 0];
+	var values = [0.10, -1.00, -0.50, 0.50];
+</script>
+
+<div id="hiddenInputs" class="hidden">
+	<!-- Скрытые поля для первого убитого -->
+	<input id="FK_field_0" type="hidden" name="field_first_killed[und][0][value]" value="">
+	<!-- прочие скрытые поля аналогично -->
+</div>
+
+<div class="timer-container">
+	<div id="timer-display" class="timer-display">00:00</div>
+	<div class="timer-controls">
+		<button class="material-button large-button" onclick="startTimer(60)">1 мин</button>
+		<button class="material-button large-button" onclick="startTimer(30)">30 сек</button>
+		<button class="material-button large-button" onclick="pauseTimer()">Пауза</button>
+		<button class="material-button large-button" onclick="resumeTimer()">Продолжить</button>
+		<button class="material-button large-button" onclick="stopTimer()">Стоп</button>
+	</div>
+</div>
+
+<div class="main-game-table-wrapper table-wrapper">
+	<table id="game_settings" class="main-game-table">
+		<thead>
+		<tr>
+			<td class="col1">№<i class="fa fa-thumbs-up"></i></td>
+			<td class="col2">Никнейм<i class="fa fa-thumbs-up"></i></td>
+			<td class="col3 nss" width="110px">Фолы</td>
+			<td class="col4 nss" width="40px"><img src="images/gun.png"></td>
+			<td class="col5 hs">Роль</td>
+			<td class="col6 hs" width="80px">Баллы</td>
+			<td class="col7 add_tag hs" width="80px">Доп</td>
+			<td class="col8 add_tag hs" width="80px">Итог</td>
+		</tr>
+		</thead>
+		<tbody id="playerRows">
+		<!-- Динамически генерируемые строки игроков -->
+		</tbody>
+	</table>
+</div>
+<input id="FK_field_0" type="hidden" name="field_first_killed[und][0][value]" value="">
+<input id="FK_field_1" type="hidden" name="field_first_killed[und][1][value]" value="">
+<input id="FK_field_2" type="hidden" name="field_first_killed[und][2][value]" value="">
+<input id="FK_field_3" type="hidden" name="field_first_killed[und][3][value]" value="">
+<input id="FK_field_4" type="hidden" name="field_first_killed[und][4][value]" value="">
+<input id="FK_field_5" type="hidden" name="field_first_killed[und][5][value]" value="">
+<input id="FK_field_6" type="hidden" name="field_first_killed[und][6][value]" value="">
+<input id="FK_field_7" type="hidden" name="field_first_killed[und][7][value]" value="">
+<input id="FK_field_8" type="hidden" name="field_first_killed[und][8][value]" value="">
+<input id="FK_field_9" type="hidden" name="field_first_killed[und][9][value]" value="">
+<input id="BM_field_0" type="hidden" name="field_best_move[und][0][value]" value="">
+<input id="BM_field_1" type="hidden" name="field_best_move[und][1][value]" value="">
+<input id="BM_field_2" type="hidden" name="field_best_move[und][2][value]" value="">
+<input id="BP_field_0" class="BP_all" type="hidden" name="field_best_player[und][0][value]" value="">
+<input id="BP_field_1" class="BP_all" type="hidden" name="field_best_player[und][1][value]" value="">
+<input id="BP_field_2" class="BP_all" type="hidden" name="field_best_player[und][2][value]" value="">
+<input id="BP_field_3" class="BP_all" type="hidden" name="field_best_player[und][3][value]" value="">
+<input id="BP_field_4" class="BP_all" type="hidden" name="field_best_player[und][4][value]" value="">
+<input id="BP_field_5" class="BP_all" type="hidden" name="field_best_player[und][5][value]" value="">
+<input id="BP_field_6" class="BP_all" type="hidden" name="field_best_player[und][6][value]" value="">
+<input id="BP_field_7" class="BP_all" type="hidden" name="field_best_player[und][7][value]" value="">
+<input id="BP_field_8" class="BP_all" type="hidden" name="field_best_player[und][8][value]" value="">
+<input id="BP_field_9" class="BP_all" type="hidden" name="field_best_player[und][9][value]" value="">
+<td id="fk_0" class="col4 fk_pick nss" data-delta="0"> </td>
+<td id="fk_1" class="col4 fk_pick nss" data-delta="1"> </td>
+<td id="fk_2" class="col4 fk_pick nss" data-delta="2"> </td>
+<td id="fk_3" class="col4 fk_pick nss" data-delta="3"> </td>
+<td id="fk_4" class="col4 fk_pick nss" data-delta="4"> </td>
+<td id="fk_5" class="col4 fk_pick nss" data-delta="5"> </td>
+<td id="fk_6" class="col4 fk_pick nss" data-delta="6"> </td>
+<td id="fk_7" class="col4 fk_pick nss" data-delta="7"> </td>
+<td id="fk_8" class="col4 fk_pick nss" data-delta="8"> </td>
+<td id="fk_9" class="col4 fk_pick nss" data-delta="9"> </td>
+<td id="fk_10" class="col4 fk_pick nss" data-delta="10"> </td>
+<div class="button-container">
+	<button class="menu-cont-button" id="settingsToggle">Роли и баллы</button>
+	<button class="menu-cont-button" id="shuffleButton">Рассадка</button>
+	<button class="menu-cont-button" id="distributeButton">Распределить роли</button>
+	<button class="menu-cont-button" id="mafia">Победа Мафии</button>
+	<button class="menu-cont-button" id="citizens">Победа Мирных</button>
+	<button class="menu-cont-button" id="resetAllForms">Новая игра</button>
+</div>
+</body>
+</html>
