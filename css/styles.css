@@ -122,15 +122,14 @@ body {
     box-shadow: var(--md-elevation-1);
 }
 }
-.col1 { width: 10%; } /* Столбец с номерами */
+.col1 { width: 8%; } /* Столбец с номерами */
 .col2 { width: auto; } /* Столбец с никнеймами */
-.col3 { width: 10%; } /* Столбец с фолами */
-.col4 { width: 10%; } /* Столбец с иконкой */
-.col5 { width: 10%; } /* Столбец с ролью */
-.col6 { width: 10%; } /* Столбец с баллами */
-.col7 { width: 10%; } /* Столбец с доп. баллами */
-.col8 { width: 10%; } /* Столбец с итогом */
-}
+.col3 { width: 14%; } /* Столбец с фолами */
+.col4 { width: 5%; } /* Столбец с иконкой */
+.col5 { width: 5%; } /* Столбец с ролью */
+.col6 { width: 5%; } /* Столбец с баллами */
+.col7 { width: 5%; } /* Столбец с доп. баллами */
+.col8 { width: 5%; } /* Столбец с итогом */
 .main-game-table th,
 .main-game-table td {
     padding: 12px;
@@ -234,13 +233,27 @@ input[type="text"]:focus {
 @media (max-width: 768px) {
     .main-game-table {
         font-size: 14px;
+        width: 100%;
+        overflow-x: auto;
     }
-
 
     .vote_butt {
         padding: 12px 18px; /* Уменьшенные отступы для мобильных устройств */
         font-size: 16px;
         text-align: center; /* Центрирование текста */
+    }
+
+    .menu-cont-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .vote-wrapper {
+        overflow-x: auto;
+    }
+
+    .timer-display {
+        font-size: 130px; /* Уменьшенный размер шрифта */
     }
 }
 
@@ -357,8 +370,8 @@ input[type="text"]:focus {
     font-size: 16px; /* Уменьшенный размер шрифта */
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 300px
-    height: 30px
+    width: 300px;
+    height: 30px;
     text-align: center;
     border: 1px solid var(--md-primary);
     display: inline-block;
@@ -616,5 +629,3 @@ input[type="text"]:focus {
     .active_line.kill {
         background-color: rgba(141, 111, 255, 0.17); /* Нежно-красный цвет с прозрачностью */
     }
-
-

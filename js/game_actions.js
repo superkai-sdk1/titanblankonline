@@ -1,11 +1,13 @@
 (function($){
     var _action = false;
-	var roles = {
-		'c': '&nbsp;',
-		'm': 'М',
-		'd': 'Д',
-		's': 'Ш'
-	}
+var roles = {
+    'c': '&nbsp;',
+    'm': 'М',
+    'd': 'Д',
+    's': 'Ш'
+};
+var $document = $(document);
+var $window = $(window);
 
     function checkValues(){
         var m = $('.role_field_all[value="m"]').length;
@@ -81,8 +83,8 @@
     }
 
 // Добавляем обработчики событий
-    document.addEventListener('DOMContentLoaded', loadData);
-    document.addEventListener('input', saveData);
+    $document.on('DOMContentLoaded', loadData);
+    $document.on('input', saveData);
 
     function setFall(delta, value) {
         if((value >= 0) && (value <= 4)) {
@@ -200,15 +202,6 @@
 		}
 	}
 
-	function in_bm(mass, elem){
-		for(var i=0; i<mass.length; i++){
-			if(mass[i] == elem){
-				return i;
-			}
-		}
-
-		return -1;
-	}
 
 	function get_bm(){
 		var res = [];
@@ -1004,7 +997,7 @@ document.addEventListener('click', function(e) {
     }
 });
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
+    $window.on('load', () => {
         navigator.serviceWorker.register('/service-worker.js')
             .then(registration => {
                 console.log('ServiceWorker зарегистрирован');
@@ -1156,4 +1149,3 @@ $('#mafia, #citizens').click(function() {
         }
     }, 0);
 });
-

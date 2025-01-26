@@ -372,10 +372,7 @@
 
 .fall_4::after {
     content: '⃠';
-    color: #ffffff; /* Нежно-красный цвет */
-}
-.fall_4::after {
-    color: #ff0000;
+    color: #ff0000; /* Нежно-красный цвет */
 }
 .fall_active {
     background-color: rgba(87, 48, 168, 0.7) !important;
@@ -452,11 +449,6 @@
     border-radius: 30%;
     box-shadow: var(--md-elevation-1); /* Легкая тень для глубины */
     transition: background 0.3s ease, color 0.3s ease;
-}
-
-.vote_day p:hover {
-    background: var(--md-primary-variant); /* Темный фиолетовый фон при наведении */
-    color: #ffffff; /* Белый цвет текста при наведении */
 }
 
 .helper {

@@ -1,10 +1,11 @@
-
 var Drupal = Drupal || { 'settings': {}, 'behaviors': {}, 'locale': {} };
 
 // Allow other JavaScript libraries to use $.
 jQuery.noConflict();
 
 (function ($) {
+  var $document = $(document);
+  var $window = $(window);
 
 /**
  * Override jQuery.fn.init to guard against XSS attacks.
@@ -508,7 +509,7 @@ Drupal.getSelection = function (element) {
  * This is primarily used by Drupal.displayAjaxError().
  */
 Drupal.beforeUnloadCalled = false;
-$(window).bind('beforeunload pagehide', function () {
+$window.on('beforeunload pagehide', function () {
     Drupal.beforeUnloadCalled = true;
 });
 
@@ -531,19 +532,19 @@ Drupal.displayAjaxError = function (message) {
 Drupal.ajaxError = function (xmlhttp, uri, customMessage) {
   var statusCode, statusText, pathText, responseText, readyStateText, message;
   if (xmlhttp.status) {
-    statusCode = "\n" + Drupal.t("An AJAX HTTP error occurred.") +  "\n" + Drupal.t("HTTP Result Code: !status", {'!status': xmlhttp.status});
+    statusCode = "\\n" + Drupal.t("An AJAX HTTP error occurred.") +  "\\n" + Drupal.t("HTTP Result Code: !status", {'!status': xmlhttp.status});
   }
   else {
-    statusCode = "\n" + Drupal.t("An AJAX HTTP request terminated abnormally.");
+    statusCode = "\\n" + Drupal.t("An AJAX HTTP request terminated abnormally.");
   }
-  statusCode += "\n" + Drupal.t("Debugging information follows.");
-  pathText = "\n" + Drupal.t("Path: !uri", {'!uri': uri} );
+  statusCode += "\\n" + Drupal.t("Debugging information follows.");
+  pathText = "\\n" + Drupal.t("Path: !uri", {'!uri': uri} );
   statusText = '';
   // In some cases, when statusCode == 0, xmlhttp.statusText may not be defined.
   // Unfortunately, testing for it with typeof, etc, doesn't seem to catch that
   // and the test causes an exception. So we need to catch the exception here.
   try {
-    statusText = "\n" + Drupal.t("StatusText: !statusText", {'!statusText': $.trim(xmlhttp.statusText)});
+    statusText = "\\n" + Drupal.t("StatusText: !statusText", {'!statusText': $.trim(xmlhttp.statusText)});
   }
   catch (e) {}
 
@@ -551,28 +552,23 @@ Drupal.ajaxError = function (xmlhttp, uri, customMessage) {
   // Again, we don't have a way to know for sure whether accessing
   // xmlhttp.responseText is going to throw an exception. So we'll catch it.
   try {
-    responseText = "\n" + Drupal.t("ResponseText: !responseText", {'!responseText': $.trim(xmlhttp.responseText) } );
+    responseText = "\\n" + Drupal.t("ResponseText: !responseText", {'!responseText': $.trim(xmlhttp.responseText) } );
   } catch (e) {}
 
   // Make the responseText more readable by stripping HTML tags and newlines.
   responseText = responseText.replace(/<("[^"]*"|'[^']*'|[^'">])*>/gi,"");
-  responseText = responseText.replace(/[\n]+\s+/g,"\n");
+  responseText = responseText.replace(/[\\n]+\s+/g,"\\n");
 
   // We don't need readyState except for status == 0.
-  readyStateText = xmlhttp.status == 0 ? ("\n" + Drupal.t("ReadyState: !readyState", {'!readyState': xmlhttp.readyState})) : "";
+  readyStateText = xmlhttp.status == 0 ? ("\\n" + Drupal.t("ReadyState: !readyState", {'!readyState': xmlhttp.readyState})) : "";
 
   // Additional message beyond what the xmlhttp object provides.
-  customMessage = customMessage ? ("\n" + Drupal.t("CustomMessage: !customMessage", {'!customMessage': customMessage})) : "";
+  customMessage = customMessage ? ("\\n" + Drupal.t("CustomMessage: !customMessage", {'!customMessage': customMessage})) : "";
 
   message = statusCode + pathText + statusText + customMessage + responseText + readyStateText;
   return message;
 };
 
-// Class indicating that JS is enabled; used for styling purpose.
-$('html').addClass('js');
-
-// 'js enabled' cookie.
-document.cookie = 'has_js=1; path=/';
 
 /**
  * Additions to jQuery.support.
@@ -613,7 +609,7 @@ Drupal.theme.prototype = {
 
 })(jQuery);
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
+  $window.on('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
         .then(registration => {
           console.log('ServiceWorker зарегистрирован');
