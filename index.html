@@ -9,6 +9,8 @@
 <script type="text/javascript" src="js/drupal.js"></script>
 <script type="text/javascript" src="js/slick.min.js"></script>
 <script type="text/javascript" src="js/game_actions.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="manifest" href="/manifest.json">
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -61,8 +63,27 @@
 	<input id="BP_field_9" class="BP_all" type="hidden" name="field_best_player[und][9][value]" value="">
 </div>
 <body>
+<script>
+	$(function() {
+		const nicknames = [
+			"AMOR", "Asia", "Alien", "Alinellas", "Animag", "Bittir", "Black", "Black Jack", "DULASHA", "Dill",
+			"Dizi", "Dushman", "EL", "Fox", "Gremlin", "Geralt", "Gestalter", "Hisoka", "Ivory", "Kai",
+			"LIRICA", "Miamore", "Mulan", "Neo", "ProDoc", "Shinobi", "Soza", "Saul Goodman", "Scorpion",
+			"TONI MONTANA", "Tam", "ZONDR", "evil", "finnick", "Йору", "Адвокат", "Альтман", "Альфа", "Асур",
+			"Бес", "Биполярка", "Булочка", "Валькирия", "Великая", "228Данте69", "Даня", "Дита", "Добрый",
+			"Дэва", "Ева", "Завклубом", "Зайка", "Зара", "Знаток", "Зёма", "Кари", "Кир", "Кира", "Кобра",
+			"Кову", "Копибара", "Коссмос", "Красавчик", "Лазер", "Лестер", "Лимонная долька", "Белый склон",
+			"Луи", "Мрак", "Маркетолог", "Марсело", "Мау", "Мафия", "Минахор", "Нафиля", "Окси", "Пантера",
+			"Паранойа", "Подкова", "Подсолнух", "Психолог", "Рокфор", "Руди", "Скорпион", "Саид", "Саймон",
+			"Салливан", "Сатору", "Светлячек", "Сирена", "Смурфик", "Статистика", "Темир", "Типсон",
+			"Томас Шелби", "Учитель", "Феникс", "Физик", "Фил", "Хейтер", "Штиль", "Элис"
+		];
 
-
+		$(".user_entity_acp").autocomplete({
+			source: nicknames
+		});
+	});
+</script>
 <div class="timer-container">
 	<div id="timer-display" class="timer-display">00:00</div>
 	<div class="timer-controls">
@@ -87,8 +108,6 @@
 				<td class="col6 hs" width="80px">Баллы</td>
 				<td class="col7 add_tag hs" width="80px">Доп</td>
 				<td class="col8 add_tag hs" width="80px">Итог</td>
-				<td rowspan="11" id="show_setts" class="col9">»</td>
-				<td rowspan="11" id="hide_setts" class="col10">«</td>
 			</tr>
 			<tr id="line_0" class="active_line">
 				<td id="vpl_0" class="col1 to_vote" data-delta="0" data-invote="0">1</td>
@@ -105,8 +124,8 @@
 							<td class="bm_pick bm_line_0 bm_pos_7 all_bm_buttons" data-pos="7" data-line="0">8</td>
 							<td class="bm_pick bm_line_0 bm_pos_8 all_bm_buttons" data-pos="8" data-line="0">9</td>
 							<td class="bm_pick bm_line_0 bm_pos_9 all_bm_buttons" data-pos="9" data-line="0">10</td>
-							<td class="hide_0 all_hide all_bm_actions" data-line="0">«</td>
-							<td class="show_0 all_show all_bm_actions" data-line="0">»</td>
+							<td class="hide_0 all_hide all_bm_actions" data-line="0"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_0 all_show all_bm_actions" data-line="0"><img src="/blank/images/show.png" alt="show icon"></td>
 							<td class="nick_0 all_nicks">
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-0-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="0" type="text" name="field_rate_game_players[und][0][target_id]" value="" maxlength="1024">
@@ -123,10 +142,9 @@
 								<div id="falls_view_0" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="0">
-								«
 							</td>
 						</tr>
-						</tbody></table>            			</td>
+						</tbody></table>           			</td>
 				<td id="fk_0" class="col4 fk_pick nss" data-delta="0"> </td>
 				<td class="col5 hs">
 					<input id="role_field_0" class="role_field_all" type="hidden" name="field_role[und][0][value]" value="c">
@@ -142,7 +160,7 @@
 						<input id="add_points_0" type="text" name="field_add_points[und][0][value]" value="" size="60" maxlength="128" class="form-text">
 					</div>
 				</td>
-				<td id="bp_0" class="col8 bp_select hs" data-delta="0"> </td>
+				<td id="bp_0" class="col8 bp_select hs" data-delta="0" readonly></td>
 			</tr>
 			<tr id="line_1" class="active_line">
 				<td id="vpl_1" class="col1 to_vote" data-delta="1" data-invote="0">2</td>
@@ -159,8 +177,8 @@
 							<td class="bm_pick bm_line_1 bm_pos_7 all_bm_buttons" data-pos="7" data-line="1">8</td>
 							<td class="bm_pick bm_line_1 bm_pos_8 all_bm_buttons" data-pos="8" data-line="1">9</td>
 							<td class="bm_pick bm_line_1 bm_pos_9 all_bm_buttons" data-pos="9" data-line="1">10</td>
-							<td class="hide_1 all_hide all_bm_actions" data-line="1">«</td>
-							<td class="show_1 all_show all_bm_actions" data-line="1">»</td>
+							<td class="hide_1 all_hide all_bm_actions" data-line="1"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_1 all_show all_bm_actions" data-line="1"><img src="/blank/images/show.png" alt="show icon"></td>
 							<td class="nick_1 all_nicks">
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-1-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="1" type="text" name="field_rate_game_players[und][1][target_id]" value="" maxlength="1024">
@@ -177,7 +195,6 @@
 								<div id="falls_view_1" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="1">
-								«
 							</td>
 						</tr>
 						</tbody></table>            			</td>
@@ -213,8 +230,8 @@
 							<td class="bm_pick bm_line_2 bm_pos_7 all_bm_buttons" data-pos="7" data-line="2">8</td>
 							<td class="bm_pick bm_line_2 bm_pos_8 all_bm_buttons" data-pos="8" data-line="2">9</td>
 							<td class="bm_pick bm_line_2 bm_pos_9 all_bm_buttons" data-pos="9" data-line="2">10</td>
-							<td class="hide_2 all_hide all_bm_actions" data-line="2">«</td>
-							<td class="show_2 all_show all_bm_actions" data-line="2">»</td>
+							<td class="hide_2 all_hide all_bm_actions" data-line="2"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_2 all_show all_bm_actions" data-line="2"><img src="/blank/images/show.png" alt="show icon"></td>
 							<td class="nick_2 all_nicks">
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-2-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="2" type="text" name="field_rate_game_players[und][2][target_id]" value="" maxlength="1024">
@@ -231,7 +248,6 @@
 								<div id="falls_view_2" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="2">
-								«
 							</td>
 						</tr>
 						</tbody></table>            			</td>
@@ -267,8 +283,8 @@
 							<td class="bm_pick bm_line_3 bm_pos_7 all_bm_buttons" data-pos="7" data-line="3">8</td>
 							<td class="bm_pick bm_line_3 bm_pos_8 all_bm_buttons" data-pos="8" data-line="3">9</td>
 							<td class="bm_pick bm_line_3 bm_pos_9 all_bm_buttons" data-pos="9" data-line="3">10</td>
-							<td class="hide_3 all_hide all_bm_actions" data-line="3">«</td>
-							<td class="show_3 all_show all_bm_actions" data-line="3">»</td>
+							<td class="hide_3 all_hide all_bm_actions" data-line="3"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_3 all_show all_bm_actions" data-line="3"><img src="/blank/images/show.png" alt="show icon"></td>
 							<td class="nick_3 all_nicks">
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-3-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="3" type="text" name="field_rate_game_players[und][3][target_id]" value="" maxlength="1024">
@@ -285,7 +301,6 @@
 								<div id="falls_view_3" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="3">
-								«
 							</td>
 						</tr>
 						</tbody></table>            			</td>
@@ -321,8 +336,8 @@
 							<td class="bm_pick bm_line_4 bm_pos_7 all_bm_buttons" data-pos="7" data-line="4">8</td>
 							<td class="bm_pick bm_line_4 bm_pos_8 all_bm_buttons" data-pos="8" data-line="4">9</td>
 							<td class="bm_pick bm_line_4 bm_pos_9 all_bm_buttons" data-pos="9" data-line="4">10</td>
-							<td class="hide_4 all_hide all_bm_actions" data-line="4">«</td>
-							<td class="show_4 all_show all_bm_actions" data-line="4">»</td>
+							<td class="hide_4 all_hide all_bm_actions" data-line="4"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_4 all_show all_bm_actions" data-line="4"><img src="/blank/images/show.png" alt="show icon"></td>
 							<td class="nick_4 all_nicks">
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-4-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="4" type="text" name="field_rate_game_players[und][4][target_id]" value="" maxlength="1024">
@@ -339,7 +354,6 @@
 								<div id="falls_view_4" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="4">
-								«
 							</td>
 						</tr>
 						</tbody></table>            			</td>
@@ -375,8 +389,8 @@
 							<td class="bm_pick bm_line_5 bm_pos_7 all_bm_buttons" data-pos="7" data-line="5">8</td>
 							<td class="bm_pick bm_line_5 bm_pos_8 all_bm_buttons" data-pos="8" data-line="5">9</td>
 							<td class="bm_pick bm_line_5 bm_pos_9 all_bm_buttons" data-pos="9" data-line="5">10</td>
-							<td class="hide_5 all_hide all_bm_actions" data-line="5">«</td>
-							<td class="show_5 all_show all_bm_actions" data-line="5">»</td>
+							<td class="hide_5 all_hide all_bm_actions" data-line="5"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_5 all_show all_bm_actions" data-line="5"><img src="/blank/images/show.png" alt="show icon"></td>
 							<td class="nick_5 all_nicks">
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-5-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="5" type="text" name="field_rate_game_players[und][5][target_id]" value="" maxlength="1024">
@@ -393,7 +407,6 @@
 								<div id="falls_view_5" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="5">
-								«
 							</td>
 						</tr>
 						</tbody></table>            			</td>
@@ -429,8 +442,8 @@
 							<td class="bm_pick bm_line_6 bm_pos_7 all_bm_buttons" data-pos="7" data-line="6">8</td>
 							<td class="bm_pick bm_line_6 bm_pos_8 all_bm_buttons" data-pos="8" data-line="6">9</td>
 							<td class="bm_pick bm_line_6 bm_pos_9 all_bm_buttons" data-pos="9" data-line="6">10</td>
-							<td class="hide_6 all_hide all_bm_actions" data-line="6">«</td>
-							<td class="show_6 all_show all_bm_actions" data-line="6">»</td>
+							<td class="hide_6 all_hide all_bm_actions" data-line="6"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_6 all_show all_bm_actions" data-line="6"><img src="/blank/images/show.png" alt="show icon"></td>
 							<td class="nick_6 all_nicks">
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-6-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="6" type="text" name="field_rate_game_players[und][6][target_id]" value="" maxlength="1024">
@@ -447,7 +460,6 @@
 								<div id="falls_view_6" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="6">
-								«
 							</td>
 						</tr>
 						</tbody></table>            			</td>
@@ -483,8 +495,8 @@
 							<td class="bm_pick bm_line_7 bm_pos_7 all_bm_buttons" data-pos="7" data-line="7">8</td>
 							<td class="bm_pick bm_line_7 bm_pos_8 all_bm_buttons" data-pos="8" data-line="7">9</td>
 							<td class="bm_pick bm_line_7 bm_pos_9 all_bm_buttons" data-pos="9" data-line="7">10</td>
-							<td class="hide_7 all_hide all_bm_actions" data-line="7">«</td>
-							<td class="show_7 all_show all_bm_actions" data-line="7">»</td>
+							<td class="hide_7 all_hide all_bm_actions" data-line="7"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_7 all_show all_bm_actions" data-line="7"><img src="/blank/images/show.png" alt="show icon"></td>
 							<td class="nick_7 all_nicks">
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-7-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="7" type="text" name="field_rate_game_players[und][7][target_id]" value="" maxlength="1024">
@@ -501,7 +513,6 @@
 								<div id="falls_view_7" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="7">
-								«
 							</td>
 						</tr>
 						</tbody></table>            			</td>
@@ -537,9 +548,8 @@
 							<td class="bm_pick bm_line_8 bm_pos_7 all_bm_buttons" data-pos="7" data-line="8">8</td>
 							<td class="bm_pick bm_line_8 bm_pos_8 all_bm_buttons" data-pos="8" data-line="8">9</td>
 							<td class="bm_pick bm_line_8 bm_pos_9 all_bm_buttons" data-pos="9" data-line="8">10</td>
-							<td class="hide_8 all_hide all_bm_actions" data-line="8">«</td>
-							<td class="show_8 all_show all_bm_actions" data-line="8">»</td>
-							<td class="nick_8 all_nicks">
+							<td class="hide_8 all_hide all_bm_actions" data-line="8"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_8 all_show all_bm_actions" data-line="8"><img src="/blank/images/show.png" alt="show icon"></td>
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-8-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="8" type="text" name="field_rate_game_players[und][8][target_id]" value="" maxlength="1024">
 								</div>
@@ -555,7 +565,6 @@
 								<div id="falls_view_8" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="8">
-								«
 							</td>
 						</tr>
 						</tbody></table>            			</td>
@@ -591,8 +600,8 @@
 							<td class="bm_pick bm_line_9 bm_pos_7 all_bm_buttons" data-pos="7" data-line="9">8</td>
 							<td class="bm_pick bm_line_9 bm_pos_8 all_bm_buttons" data-pos="8" data-line="9">9</td>
 							<td class="bm_pick bm_line_9 bm_pos_9 all_bm_buttons" data-pos="9" data-line="9">10</td>
-							<td class="hide_9 all_hide all_bm_actions" data-line="9">«</td>
-							<td class="show_9 all_show all_bm_actions" data-line="9">»</td>
+							<td class="hide_9 all_hide all_bm_actions" data-line="9"><img src="/blank/images/hide.png" alt="hide icon"></td>
+							<td class="show_9 all_show all_bm_actions" data-line="9"><img src="/blank/images/show.png" alt="show icon"></td>
 							<td class="nick_9 all_nicks">
 								<div class="form-item form-type-textfield form-item-field-rate-game-players-und-9-target-id">
 									<input class="user_entity_acp nick_acpl selected form-text form-autocomplete" data-delta="9" type="text" name="field_rate_game_players[und][9][target_id]" value="" maxlength="1024">
@@ -609,7 +618,6 @@
 								<div id="falls_view_9" class="fall_0"> </div>
 							</td>
 							<td width="20px" class="remove_click border_0" data-delta="9">
-								«
 							</td>
 						</tr>
 						</tbody></table>            			</td>
@@ -632,6 +640,12 @@
 			</tr>
 			</tbody>
 		</table>
+	</div>
+	<div id="firstKillModal" class="modal">
+		<div class="modal-content">
+			<h3>Выберите первого убитого</h3>
+			<div id="firstKillOptions"></div>
+		</div>
 	</div>
 	<div class="vote-wrapper">
 		<div class="vote-table-wrapper">
@@ -740,15 +754,22 @@
 	</div>
 </div>
 </body>
-<div>
-	<button type="button" class="menu-cont-button" id="mafia" onclick="selectWinner('mafia')">Победа Мафии</button>
-	<button type="button" class="menu-cont-button" id="citizens" onclick="selectWinner('citizens')">Победа Мирных</button>
-	<button class="menu-cont-button" id="distributeButton" onclick="handleDistribution()">Распределить роли</button>
-	<button type="button" id="resetAllForms" class="menu-cont-button">Новая игра</button>
-</div>
-</div>
-</div>
+<div class="button-container">
+	<button class="menu-cont-button" id="settingsToggle">Роли и баллы</button>
+	<button class="menu-cont-button" id="shuffleButton">Рассадка</button>
+	<button class="menu-cont-button" id="distributeButton">Распределить роли</button>
+	<button type="button" class="menu-cont-button" id="mafia">Победа Мафии</button>
+	<button type="button" class="menu-cont-button" id="citizens">Победа Мирных</button>
 
+
+	<button class="menu-cont-button" id="resetAllForms">Новая игра</button>
+</div>
+	</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
 <script>
 	let isFirstDistribution = true;
 	function handleDistribution() {
@@ -761,6 +782,8 @@
 			}
 		}
 	}
+	document.getElementById('distributeButton').addEventListener('click', handleDistribution);
+
 	function distributeRoles() {
 		let roles = [
 			{display: 'Д', value: 'd'},  // Дон
@@ -790,7 +813,83 @@
 		}
 	}
 </script>
+<script>$(document).ready(function() {
+	$('#mafia, #citizens').click(function() {
+		setTimeout(function() {
+			for(let i = 0; i < 10; i++) {
+				updateTotal(i);
+			}
+		}, 0);
+	});
+});
+</script>
+<script>document.getElementById('settingsToggle').addEventListener('click', function() {
+	const elements = document.querySelectorAll('.hs');
+	elements.forEach(el => {
+		el.style.display = el.style.display === 'none' ? 'table-cell' : 'none';
+	});
+	this.textContent = this.textContent === "Скрыть роли и баллы" ?
+			"Показать роли и баллы" :
+			"Скрыть роли и баллы";
+});
+</script>
 <script>
+	function shuffleNicknames() {
+// Получаем все поля с никнеймами
+const nicknameInputs = document.querySelectorAll('.nick_acpl');
+
+// Собираем текущие значения
+let nicknames = Array.from(nicknameInputs).map(input => input.value);
+
+// Перемешиваем массив
+for (let i = nicknames.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[nicknames[i], nicknames[j]] = [nicknames[j], nicknames[i]];
+}
+
+// Присваиваем новые значения
+nicknameInputs.forEach((input, index) => {
+input.value = nicknames[index];
+});
+}
+
+// Добавляем обработчик события
+document.getElementById('shuffleButton').addEventListener('click', shuffleNicknames);
+
+	document.getElementById('shuffleButton').addEventListener('click', function() {
+		if (confirm('Вы действительно хотите рассадить игроков?')) {
+			// Сброс ролей
+			for(let i = 0; i < 10; i++) {
+				document.getElementById(`role_field_${i}`).value = 'c';
+				document.getElementById(`role_view_${i}`).textContent = '';
+				document.getElementById(`role_view_${i}`).className = 'role';
+			}
+
+			// Рассадка игроков
+			const nickInputs = document.querySelectorAll('.nick_acpl');
+			const nicknames = Array.from(nickInputs).map(input => input.value);
+			const shuffled = nicknames.sort(() => Math.random() - 0.5);
+
+			nickInputs.forEach((input, index) => {
+				input.value = shuffled[index];
+			});
+		}
+	});
+</script>
+<script>document.getElementById('resetAllForms').addEventListener('click', function() {
+	localStorage.clear(); // Очищаем все данные из localStorage
+	location.reload(); // Перезагружаем страницу
+});</script>
+<script>
+	$('#mafia, #citizens').click(function() {
+		setTimeout(function() {
+			for(let i = 0; i < 10; i++) {
+				updateTotal(i);
+			}
+		}, 0);
+	});
+</script>
+
 </section>
 </div>
 </section>
