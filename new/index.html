@@ -42,12 +42,48 @@
 	var bms_23 = [0.25, 0.25, 0];
 	var bms_33 = [0.5, 0.5, 0];
 	var values = [0.10, -1.00, -0.50, 0.50];
+
+	// Additional JavaScript for fk and bm_pick
+	$(document).ready(function() {
+		$('.fk_pick').click(function() {
+			var delta = $(this).data('delta');
+			if (!$(this).hasClass("fk_selected")) {
+				set_fk(delta);
+			}
+		});
+
+		$('.bm_pick').click(function() {
+			var pos = parseInt($(this).data('pos'));
+			set_bm(pos);
+		});
+	});
 </script>
 
 <div id="hiddenInputs" class="hidden">
 	<!-- Скрытые поля для первого убитого -->
 	<input id="FK_field_0" type="hidden" name="field_first_killed[und][0][value]" value="">
-	<!-- прочие скрытые поля аналогично -->
+	<input id="FK_field_1" type="hidden" name="field_first_killed[und][1][value]" value="">
+	<input id="FK_field_2" type="hidden" name="field_first_killed[und][2][value]" value="">
+	<input id="FK_field_3" type="hidden" name="field_first_killed[und][3][value]" value="">
+	<input id="FK_field_4" type="hidden" name="field_first_killed[und][4][value]" value="">
+	<input id="FK_field_5" type="hidden" name="field_first_killed[und][5][value]" value="">
+	<input id="FK_field_6" type="hidden" name="field_first_killed[und][6][value]" value="">
+	<input id="FK_field_7" type="hidden" name="field_first_killed[und][7][value]" value="">
+	<input id="FK_field_8" type="hidden" name="field_first_killed[und][8][value]" value="">
+	<input id="FK_field_9" type="hidden" name="field_first_killed[und][9][value]" value="">
+	<input id="BM_field_0" type="hidden" name="field_best_move[und][0][value]" value="">
+	<input id="BM_field_1" type="hidden" name="field_best_move[und][1][value]" value="">
+	<input id="BM_field_2" type="hidden" name="field_best_move[und][2][value]" value="">
+	<input id="BP_field_0" class="BP_all" type="hidden" name="field_best_player[und][0][value]" value="">
+	<input id="BP_field_1" class="BP_all" type="hidden" name="field_best_player[und][1][value]" value="">
+	<input id="BP_field_2" class="BP_all" type="hidden" name="field_best_player[und][2][value]" value="">
+	<input id="BP_field_3" class="BP_all" type="hidden" name="field_best_player[und][3][value]" value="">
+	<input id="BP_field_4" class="BP_all" type="hidden" name="field_best_player[und][4][value]" value="">
+	<input id="BP_field_5" class="BP_all" type="hidden" name="field_best_player[und][5][value]" value="">
+	<input id="BP_field_6" class="BP_all" type="hidden" name="field_best_player[und][6][value]" value="">
+	<input id="BP_field_7" class="BP_all" type="hidden" name="field_best_player[und][7][value]" value="">
+	<input id="BP_field_8" class="BP_all" type="hidden" name="field_best_player[und][8][value]" value="">
+	<input id="BP_field_9" class="BP_all" type="hidden" name="field_best_player[und][9][value]" value="">
 </div>
 
 <div class="timer-container">
